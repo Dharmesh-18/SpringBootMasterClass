@@ -1,23 +1,30 @@
 package com.example.demo.customer;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(path = "api/v1/customer")
+@RequestMapping(path = "api/v2/customers")
 @RestController
-public class CustomerController {
+public class CustomerControllerv2 {
 
     private final CustomerService customerService;
 
-    public CustomerController(CustomerService customerService) {
+    @Autowired
+    public CustomerControllerv2(CustomerService customerService) {
         this.customerService = customerService;
     }
 
-    @GetMapping(value = "all")
+    @GetMapping
     List<Customer> getCustomers(){
         return customerService.getCustomers();
+    }
+
+    @GetMapping(path = "{customerId}")
+    Customer getCustomer(@PathVariable("customerId") Long id){
+        return customerService.getCustomer(id);
     }
 
     @PostMapping
