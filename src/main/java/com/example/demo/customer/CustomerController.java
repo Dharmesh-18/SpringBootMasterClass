@@ -5,6 +5,8 @@ import com.example.demo.DemoApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class CustomerController {
 
@@ -15,7 +17,7 @@ public class CustomerController {
     }
 
     @GetMapping(path = "/")
-    Customer getCustomer(){
+    List<Customer> getCustomer(){
         return customerService.getCustomer();
 
     }
