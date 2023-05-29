@@ -1,6 +1,7 @@
 package com.example.demo.customer;
 
 
+import com.example.demo.exception.ApiRequestException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class CustomerControllerv2 {
         this.customerService = customerService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/all")
     List<Customer> getCustomers(){
         return customerService.getCustomers();
     }
@@ -27,6 +28,12 @@ public class CustomerControllerv2 {
     Customer getCustomer(@PathVariable("customerId") Long id){
         return customerService.getCustomer(id);
     }
+
+    @GetMapping(path = "{customerId}/exception")
+    Customer getCustomerException(@PathVariable("customerId") Long id){
+        throw new ApiRequestException("ApiRequestException for customer with id: " + id);
+    }
+
 
     @PostMapping
     void createNewCustomer(@Valid @RequestBody Customer customer){

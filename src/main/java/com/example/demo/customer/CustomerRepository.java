@@ -9,6 +9,6 @@ public class CustomerRepository implements CustomerRepo {
     public List<Customer> getCustomer() {
 
         // TODO: connect to real DB
-        return Collections.emptyList();
+        return Collections.singletonList(new Customer(1L, "Iron Man", "Jarvis@18", "IronMan@gmail.com"));
     }
 }
